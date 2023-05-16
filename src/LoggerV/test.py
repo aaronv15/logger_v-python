@@ -1,17 +1,4 @@
-from logger import *
-from loggerExceptions import *
-
-
-@preformer
-def run():
-    # a = [i for i in range(1000000)]
-    for i in range(1000000):
-        pass
-
-
-@funcLogger("Hello")
-def a():
-    print("In a")
+from logger import Logger, funcLogger
 
 
 class temp:
@@ -30,26 +17,30 @@ logger.loadCustom(
 
 
 @funcLogger(logger)
-def divideByZero(num, run):
+def divideByZero(num, run=1, fail=None):
     return 10 / num
 
 
 @funcLogger(logger)
-def otherFunc(string, run):
+def otherFunc(string, run=1, fail=None):
     return int(string)
 
 
-logger.append("Starting", message="Testing", custom=temp(), success=True)
-logger.append("Test", "Testing", success=False)
-logger.append("Nothing")
+# logger.addPartition("before", 1)
+# logger.addPartition("after", 4)
+# logger.append(
+#     "First Log", message="Testing", custom=temp(), success=True, partition="after"
+# )
+# logger.append("Second Log", "Testing", success=False, partition="before")
+# logger.append("Third Log")
 for i in range(10):
     i = i if i % 2 != 0 else "f"
     try:
         divideByZero(i)
     except Exception as ex:
         pass
-    try:
-        otherFunc(i)
-    except Exception as ex:
-        pass
+    # try:
+    #     otherFunc(i, fail=4)
+    # except Exception as ex:
+    #     pass
 print(logger)
